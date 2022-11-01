@@ -1,3 +1,5 @@
+
+
 const options = {
 	method: 'GET',
 	headers: {
@@ -16,7 +18,6 @@ const options = {
         .then(response => response.json())
         .then(response => 
          retrievingData(response)
-           
             )
         .catch(err => console.error(err));
         console.log('cuco');
@@ -37,9 +38,33 @@ const options = {
          weatherNowTitle.innerText = response.current.condition.text;
         
         
-         // const weatherDay2Title = response.forecast.forecastday[1].day.condition.text;
-          weatherDay2Title.innerText = response.forecast.forecastday[1].day.condition.text;
+        //  const weatherDay2Title = response.forecast.forecastday[1].day.condition.text;
+          const weatherDay2Title = response.forecast.forecastday;
+     
+         populateTaskList(response);
+        //  weatherDay2Title.innerText = response.forecast.forecastday[1].day.condition.text;
         console.log(response);
         // console.log(weatherDay2Title);
           
     }
+
+   
+    // 
+
+    
+function populateTaskList(response = []) {
+    
+ //   console.log(taskList);
+    console.log(response);
+    const taskList = document.getElementById('taskList');
+const b = response.forecast.forecastday;
+console.log(b);
+    taskList.innerHTML = b.map((task, i) => {
+        console.log(task);
+        return `
+       <label>Data: ${task.date}</label>     <br>
+       <label>Temperatura máxima: ${task.day.maxtemp_c}</label>     <br>
+       <label>Temperatura mínima: ${task.day.mintemp_c}</label>  <br><br>
+            `;
+    }).join('');
+}
