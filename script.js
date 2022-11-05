@@ -14,6 +14,7 @@ const options = {
 
 
 function searchWeather(){
+    console.log('cuco2');
     const input = document.getElementById("searchInput").value;
     fetch('https://weatherapi-com.p.rapidapi.com/current.json?q='+input, options)
 	.then(response => response.json())
